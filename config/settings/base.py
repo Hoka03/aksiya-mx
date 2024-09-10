@@ -26,8 +26,6 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'modeltranslation',
-    'ckeditor',
-    'ckeditor_uploader',
     'django_ckeditor_5',
     'debug_toolbar',
     'corsheaders',
