@@ -1,0 +1,60 @@
+version: "3.9"
+
+
+services:
+  discount-proj:
+    build: .
+    container_name: my_discount
+    command: sh -c "python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    depends_on:
+      - postgres_db
+      - redis
+
+
+  postgres_db:
+    image: postgres:16
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres_data:/var/lib/postgres/data
+    environment:
+      - POSTGRES_DB=discount_db
+      - POSTGRES_USER=discount_user
+      - POSTGRES_PASSWORD=discount_password
+
+  celery:
+    build: .
+    container_name: celery_discount
+    command: celery -A config worker --loglevel=info
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6381/2
+
+  celery-beat:
+    build: .
+    container_name: celery_beat_discount
+    command: celery -A config beat --loglevel=info
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
+      - postgres_db
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6381/2
+
+  redis:
+    image: redis:6-alpine
+    container_name: redis_discount
+    ports:
+      - "6381:6379"
+
+
+volumes:
+  postgres_data:

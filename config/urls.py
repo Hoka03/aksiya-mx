@@ -5,6 +5,7 @@ from django.conf.urls.static import static
 
 from .yasg import schema_view
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 
