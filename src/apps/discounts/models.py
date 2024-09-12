@@ -88,17 +88,6 @@ class Discount(models.Model):
     service = models.ForeignKey(ServiceDiscount, on_delete=models.SET_NULL, null=True)
 
     def get_features(self):
-        # features = [
-        #     {
-        #         'feature_id': {
-        #             'name': 'name', ######
-        #             'values': [
-        #                 {'id': '1', 'name': '122'},
-        #                 {'id': '2', 'name': '322'}
-        #             ]
-        #         }
-        #     }
-        # ]
         features = {}
         feature_values = FeatureValue.objects.filter(discountfeature__discount__id=self.pk
                                                      ).distinct().select_related('feature')
