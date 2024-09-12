@@ -1,5 +1,5 @@
 from django.urls import path
-from src.apps.features.views import feature_discounts, features, feature_values
+from apps.features.views import feature_discounts, features, feature_values
 
 urlpatterns = [
     #   FEATURE CRUD URLS OF APIVIEW

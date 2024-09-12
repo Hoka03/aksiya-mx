@@ -1,6 +1,6 @@
 from django.urls import path
 
-from src.apps.discounts.views import discount_service, discount_image, discount
+from apps.discounts.views import discount_service, discount_image, discount
 
 urlpatterns = [
     #       DISCOUNT CRUD URLS OF APIVIEW
