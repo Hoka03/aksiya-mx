@@ -1,7 +1,7 @@
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
-from src.apps.general.variables import COMPANY_VIDEO_MAX_SIZE, COMPANY_LOGO_MAX_SIZE, COMPANY_BANNER_MAX_SIZE
+from apps.general.variables import COMPANY_VIDEO_MAX_SIZE, COMPANY_LOGO_MAX_SIZE, COMPANY_BANNER_MAX_SIZE
 
 
 def validate_company_video_size(video_file):

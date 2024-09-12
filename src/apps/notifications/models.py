@@ -1,9 +1,9 @@
 from django.db import models
 from django.db.models import SET_NULL
 
-from src.apps.companies.models import Company, BranchCompany
-from src.apps.discounts.choices import DiscountChoices
-from src.apps.general.normalize_text import normalize_text
+from apps.companies.models import Company, BranchCompany
+from apps.discounts.choices import DiscountChoices
+from apps.general.normalize_text import normalize_text
 
 
 class Notification(models.Model):

@@ -1,7 +1,7 @@
 import requests
 from celery import shared_task
-from src.apps.general.models import CurrencyRate
-from src.apps.discounts.choices import Currency
+from apps.general.models import CurrencyRate
+from apps.discounts.choices import Currency
 
 
 @shared_task

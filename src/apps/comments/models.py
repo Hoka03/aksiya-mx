@@ -1,8 +1,8 @@
 from django.conf import settings
 from django.db import models
 
-from src.apps.discounts.models import Discount
-from src.apps.general.normalize_text import normalize_text
+from apps.discounts.models import Discount
+from apps.general.normalize_text import normalize_text
 
 
 class Comment(models.Model):

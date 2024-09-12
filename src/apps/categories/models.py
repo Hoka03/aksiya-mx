@@ -1,8 +1,8 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 
-from src.apps.general.validate_file_size import validate_logo_size
-from src.apps.general.normalize_text import normalize_text
+from apps.general.validate_file_size import validate_logo_size
+from apps.general.normalize_text import normalize_text
 
 
 class Category(models.Model):

@@ -2,13 +2,13 @@ from django.db import models
 from django.db.models import IntegerChoices, TextField
 from django.core.validators import ValidationError
 
-from src.apps.categories.models import Category
-from src.apps.companies.models import Company, BranchCompany
-from src.apps.discounts.choices import Currency, DiscountChoices
-from src.apps.features.models import FeatureValue
-from src.apps.general.models import CurrencyRate
-from src.apps.general.normalize_text import normalize_text
-from src.apps.general.validate_file_size import validate_icon_size, validate_image_size
+from apps.categories.models import Category
+from apps.companies.models import Company, BranchCompany
+from apps.discounts.choices import Currency, DiscountChoices
+from apps.features.models import FeatureValue
+from apps.general.models import CurrencyRate
+from apps.general.normalize_text import normalize_text
+from apps.general.validate_file_size import validate_icon_size, validate_image_size
 
 
 class ServiceDiscount(models.Model):

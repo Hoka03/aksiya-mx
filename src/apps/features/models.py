@@ -2,8 +2,8 @@ from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator
 from django.db import models
 
-from src.apps.categories.models import Category
-from src.apps.general.normalize_text import normalize_text
+from apps.categories.models import Category
+from apps.general.normalize_text import normalize_text
 
 
 class Feature(models.Model):

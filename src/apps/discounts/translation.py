@@ -1,10 +1,8 @@
 from modeltranslation.translator import TranslationOptions, register
 
-from src.apps.discounts.models import Discount
+from apps.discounts.models import Discount
 
 
 @register(Discount)
 class DiscountTranslationOptions(TranslationOptions):
-    fields = ('title',
-              # 'description'
-              )
+    fields = ('title', 'description')

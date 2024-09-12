@@ -4,14 +4,14 @@ from django.db.models import TextField
 from django.core.exceptions import ValidationError
 from django.core.validators import FileExtensionValidator
 
-from src.apps.categories.models import Category
-from src.apps.companies.choices import Country, District
-from src.apps.companies.validators import validate_company_video_size, validate_company_logo_size, \
+from apps.categories.models import Category
+from apps.companies.choices import Country, District
+from apps.companies.validators import validate_company_video_size, validate_company_logo_size, \
     validate_company_banner_size
-from src.apps.general.enums.week_days import WeekDay
-from src.apps.general.normalize_text import normalize_text
-from src.apps.general.validate_file_size import validate_logo_size, validate_banner_size
-from src.apps.users.validations import phone_validate
+from apps.general.enums.week_days import WeekDay
+from apps.general.normalize_text import normalize_text
+from apps.general.validate_file_size import validate_logo_size, validate_banner_size
+from apps.users.validations import phone_validate
 
 
 class Company(models.Model):

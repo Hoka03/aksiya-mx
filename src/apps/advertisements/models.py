@@ -1,9 +1,9 @@
 from django.db import models
 
-from src.apps.categories.models import Category
-from src.apps.discounts.models import Discount
-from src.apps.general.normalize_text import normalize_text
-from src.apps.general.validate_file_size import validate_image_size
+from apps.categories.models import Category
+from apps.discounts.models import Discount
+from apps.general.normalize_text import normalize_text
+from apps.general.validate_file_size import validate_image_size
 
 
 class Advertisement(models.Model):

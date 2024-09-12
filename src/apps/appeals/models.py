@@ -1,9 +1,9 @@
 from django.conf import settings
 from django.db import models
 
-from src.apps.companies.models import Company
-from src.apps.general.normalize_text import normalize_text
-from src.apps.users.validations import phone_validate
+from apps.companies.models import Company
+from apps.general.normalize_text import normalize_text
+from apps.users.validations import phone_validate
 
 
 class Appeal(models.Model):

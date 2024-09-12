@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from src.apps.discounts.models import Discount
+from apps.discounts.models import Discount
 
 
 @admin.register(Discount)

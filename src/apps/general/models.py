@@ -1,6 +1,6 @@
 from django.db import models
 
-from src.apps.discounts.choices import Currency
+from apps.discounts.choices import Currency
 
 
 class CurrencyRate(models.Model):

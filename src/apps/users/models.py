@@ -3,9 +3,9 @@ from django.db import models
 from django.db.models import IntegerChoices
 from rest_framework.exceptions import ValidationError
 
-from src.apps.general import normalize_text
-from src.apps.users.managers import CustomUserManager
-from src.apps.users.validations import phone_validate
+from apps.general import normalize_text
+from apps.users.managers import CustomUserManager
+from apps.users.validations import phone_validate
 
 
 class CustomUser(AbstractUser):
