@@ -39,12 +39,13 @@ services:
 
   celery-beat:
     build: .
-    container_name: celery_beat_discount
+    container_name: celery_beat
     command: celery -A config beat --loglevel=info
     volumes:
       - .:/app
     depends_on:
       - redis
+      - celery
       - postgres_db
     environment:
       - CELERY_BROKER_URL=redis://redis:6381/2
@@ -54,7 +55,10 @@ services:
     container_name: redis_discount
     ports:
       - "6381:6379"
+    volumes:
+      - redis_data:/data
 
 
 volumes:
   postgres_data:
+  redis_data:

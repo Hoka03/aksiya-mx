@@ -86,8 +86,8 @@ local_settings.py
 #My ignore
 Pipfile
 Pipfile.lock
-.env
+src/.env
 media
 gitpush.py
-apps/*/migrations/0*
+src/apps/*/migrations/0*
 .idea
