@@ -9,7 +9,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - .:/app
+      - ./src:/app
     depends_on:
       - postgres_db
       - redis
@@ -31,24 +31,24 @@ services:
     container_name: celery_discount
     command: celery -A config worker --loglevel=info
     volumes:
-      - .:/app
+      - ./src:/app
     depends_on:
       - redis
     environment:
-      - CELERY_BROKER_URL=redis://redis:6381/2
+      - CELERY_BROKER_URL=redis://redis:6379/2
 
   celery-beat:
     build: .
     container_name: celery_beat
     command: celery -A config beat --loglevel=info
     volumes:
-      - .:/app
+      - ./src:/app
     depends_on:
       - redis
       - celery
       - postgres_db
     environment:
-      - CELERY_BROKER_URL=redis://redis:6381/2
+      - CELERY_BROKER_URL=redis://redis:6379/2
 
   redis:
     image: redis:6-alpine

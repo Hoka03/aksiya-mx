@@ -5,8 +5,6 @@ from django.core.validators import ValidationError
 from apps.categories.models import Category
 from apps.companies.models import Company, BranchCompany
 from apps.discounts.choices import Currency, DiscountChoices
-from apps.features.models import FeatureValue
-from apps.general.models import CurrencyRate
 from apps.general.normalize_text import normalize_text
 from apps.general.validate_file_size import validate_icon_size, validate_image_size
 
@@ -40,9 +38,10 @@ class Discount(models.Model):
 
     company = models.ForeignKey(Company, on_delete=models.SET_NULL,
                                 null=True)
-    branch_company = models.ManyToManyField(BranchCompany, related_name='discounts', blank=True)
+    branch_company = models.ManyToManyField(BranchCompany, related_name='discounts',
+                                            blank=True)
     category = models.ForeignKey(Category, on_delete=models.PROTECT,
-                                 limit_choices_to={"parent__parent_is_null": False})
+                                 limit_choices_to={"parent__parent__isnull": False})
 
     status = models.PositiveSmallIntegerField(choices=Status.choices)
     discount_type = models.PositiveSmallIntegerField(choices=DiscountChoices.choices)
@@ -86,29 +85,6 @@ class Discount(models.Model):
 
     #Service discount
     service = models.ForeignKey(ServiceDiscount, on_delete=models.SET_NULL, null=True)
-
-    def get_features(self):
-        features = {}
-        feature_values = FeatureValue.objects.filter(discountfeature__discount__id=self.pk
-                                                     ).distinct().select_related('feature')
-        for feature_value in feature_values:
-            feature = feature_value.feature
-            feature_id = features.pk
-            feature_name = feature_id.name
-            value = {'id': feature_values.id, 'name': feature_value.value}
-
-            if feature_id not in features:
-                features[feature_id] = {'name': feature_name, 'values': [value]}
-            else:
-                features[feature_id]['values'].append(value)
-
-        return features
-
-
-    def get_old_price_by_currency(self, currency):
-        if currency != self.currency:
-            return CurrencyRate.objects.get(currency=currency).in_sum * self.old_price
-        return self.old_price
 
     def get_normalize_fields(self):
         return [

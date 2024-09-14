@@ -3,7 +3,7 @@ from django.db import models
 from django.db.models import IntegerChoices
 from rest_framework.exceptions import ValidationError
 
-from apps.general import normalize_text
+from apps.general.normalize_text import normalize_text
 from apps.users.managers import CustomUserManager
 from apps.users.validations import phone_validate
 

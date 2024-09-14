@@ -1,22 +1,21 @@
 import requests
 from celery import shared_task
-from apps.general.models import CurrencyRate
 from apps.discounts.choices import Currency
 
 
-@shared_task
-def update_usd_rate():
-    url = 'https://cbu.uz/ru/arkhiv-kursov-valyut/json/'
-    response = requests.get(url).json()
-    obj = CurrencyRate.objects.filter(currency=Currency.USD).first()
-
-    if obj:
-        obj.in_sum = response[0]['Rate']
-        obj.save()
-    else:
-        obj = Currency.objects.create(currency=Currency.USD,
-                                      in_sum=response[0]['Rate'])
-    return obj
+# @shared_task
+# def update_usd_rate():
+#     url = 'https://cbu.uz/ru/arkhiv-kursov-valyut/json/'
+#     response = requests.get(url).json()
+#     obj = CurrencyRate.objects.filter(currency=Currency.USD).first()
+#
+#     if obj:
+#         obj.in_sum = response[0]['Rate']
+#         obj.save()
+#     else:
+#         obj = Currency.objects.create(currency=Currency.USD,
+#                                       in_sum=response[0]['Rate'])
+#     return obj
 
     # try:
     #     usd_rate = next(item['Rate'] for item in data if item['Ccy'] == 'USD')

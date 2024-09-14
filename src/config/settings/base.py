@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'corsheaders',
     'drf_yasg',
+    'rest_framework_simplejwt',
 ]
 
 INSTALLED_APPS += [
