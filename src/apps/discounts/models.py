@@ -61,6 +61,7 @@ class Discount(models.Model):
     views = models.PositiveIntegerField()
     likes = models.PositiveIntegerField()
     dislikes = models.PositiveIntegerField()
+    comments = models.PositiveIntegerField()
 
     start_date = models.DateField()
     end_date = models.DateField()

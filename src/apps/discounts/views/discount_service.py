@@ -31,4 +31,3 @@ class ServiceDiscountUpdateAPIView(generics.UpdateAPIView):
 # Delete a specific service discount by ID
 class ServiceDiscountDestroyAPIView(generics.DestroyAPIView):
     queryset = ServiceDiscount.objects.all()
-    serializer_class = ServiceDiscountSerializer

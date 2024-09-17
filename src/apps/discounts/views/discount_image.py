@@ -31,4 +31,3 @@ class DiscountImageUpdateAPIView(generics.UpdateAPIView):
 # Delete a specific discount image by ID
 class DiscountImageDestroyAPIView(generics.DestroyAPIView):
     queryset = DiscountImage.objects.all()
-    serializer_class = DiscountImageSerializer
