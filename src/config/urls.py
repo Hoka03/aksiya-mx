@@ -12,8 +12,8 @@ urlpatterns = [
     path('__debug__/', include('debug_toolbar.urls')),
 
     #   URLS OF APPS
-    path('auth/', include('apps.authentications.urls')),
-    path('discounts/', include('apps.discounts.urls')),
+    path('auth/api/v1/', include('apps.authentications.urls')),
+    path('discounts/api/v1/', include('apps.discounts.urls')),
 
     #   SWAGGER
     path('', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
