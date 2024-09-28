@@ -1,14 +1,12 @@
 from django.conf import settings
 from django.db import models
 from django.db.models import TextField
-from django.core.exceptions import ValidationError
 from django.core.validators import FileExtensionValidator
 
 from apps.categories.models import Category
 from apps.companies.choices import Country, District
 from apps.companies.validators import validate_company_video_size, validate_company_logo_size, \
     validate_company_banner_size
-from apps.general.enums.week_days import WeekDay
 from apps.general.normalize_text import normalize_text
 from apps.general.validate_file_size import validate_logo_size, validate_banner_size
 from apps.users.validations import phone_validate
@@ -16,7 +14,7 @@ from apps.users.validations import phone_validate
 
 class Company(models.Model):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
-    category = models.ManyToManyField(Category, blank=True)
+    category = models.ManyToManyField(Category, blank=True, related_name='companies')
 
     #   BIO FOR CREATE COMPANY ------ FIRST STEP
     last_name = models.CharField(max_length=120)
@@ -40,6 +38,8 @@ class Company(models.Model):
                                            validate_banner_size],
                                blank=True, null=True)
 
+    #   CREATE COMPANY ---------- THIRD STEP
+
     country = models.PositiveSmallIntegerField(choices=Country.choices)
     district = models.PositiveSmallIntegerField(choices=District.choices)
 
@@ -60,7 +60,7 @@ class Company(models.Model):
 
     description = TextField(max_length=2500)
 
-    web_site = models.URLField(max_length=300)
+    web_site = models.URLField(max_length=300, blank=True, null=True)
 
     longitude = models.FloatField()
     latitude = models.FloatField()
@@ -174,57 +174,3 @@ class Company(models.Model):
     def __str__(self):
         return self.name
 
-
-class BranchCompany(models.Model):
-    company = models.ForeignKey(Company, on_delete=models.PROTECT)
-
-    name = models.CharField(max_length=255)
-    phone_number = models.CharField(max_length=13, validators=[phone_validate])
-    address = models.CharField(max_length=255)
-
-    country = models.PositiveSmallIntegerField(choices=Country.choices)
-    district = models.PositiveSmallIntegerField(choices=District.choices)
-
-    delivery = models.BooleanField(default=False)
-
-    longitude = models.FloatField()
-    latitude = models.FloatField()
-
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def get_normalize_fields(self):
-        return [
-            'name',
-            'address'
-        ]
-
-    def save(self, *args, **kwargs):
-        normalize_text(self)
-        super().save(*args, **kwargs)
-
-    def get_address(self):
-        return {
-            'address': self.address,
-            'longitude': self.longitude,
-            'latitude': self.latitude
-        }
-
-    def __str__(self):
-        return self.name
-
-
-class CompanyTimeTable(models.Model):
-    company = models.ForeignKey(Company, on_delete=models.PROTECT, blank=True, null=True)
-    branch_company = models.ForeignKey(BranchCompany, on_delete=models.PROTECT, blank=True, null=True)
-
-    week_day = models.PositiveSmallIntegerField(choices=WeekDay.choices)
-    start_time = models.TimeField()
-    end_time = models.TimeField()
-
-    class Meta:
-        unique_together = (('company', 'week_day'),
-                           ('branch_company', 'week_day'))
-
-    def clean(self):
-        if self.start_time > self.end_time:
-            raise ValidationError('start_time must be lower than end_time!')

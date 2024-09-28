@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.db import models
 
-from apps.companies.models import Company
+from apps.companies.models.company import Company
 from apps.general.normalize_text import normalize_text
 from apps.users.validations import phone_validate
 

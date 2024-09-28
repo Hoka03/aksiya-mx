@@ -1,7 +1,8 @@
 from django.db import models
 from django.db.models import SET_NULL
 
-from apps.companies.models import Company, BranchCompany
+from apps.companies.models.company import Company
+from apps.companies.models.branch import BranchCompany
 from apps.discounts.choices import DiscountChoices
 from apps.general.normalize_text import normalize_text
 

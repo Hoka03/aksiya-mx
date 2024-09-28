@@ -3,7 +3,8 @@ from django.db.models import IntegerChoices, TextField
 from django.core.validators import ValidationError
 
 from apps.categories.models import Category
-from apps.companies.models import Company, BranchCompany
+from apps.companies.models.company import Company
+from apps.companies.models.branch import BranchCompany
 from apps.discounts.choices import Currency, DiscountChoices
 from apps.general.normalize_text import normalize_text
 from apps.general.validate_file_size import validate_icon_size, validate_image_size

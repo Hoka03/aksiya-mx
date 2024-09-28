@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from .models import Discount, DiscountImage, ServiceDiscount
-from ..companies.models import BranchCompany
+from apps.companies.models.branch import BranchCompany
 
 
 class DiscountListSerializer(serializers.ModelSerializer):
@@ -58,6 +58,9 @@ class DiscountCreateUpdateSerializer(serializers.ModelSerializer):
 
 
 class DiscountRetrieveSerializer(serializers.ModelSerializer):
+    """
+    Here we are checking only 1 object. Type of Retrieve
+    """
     class Meta:
         model = Discount
         """

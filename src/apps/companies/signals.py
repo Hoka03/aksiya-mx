@@ -1,7 +1,7 @@
 from django.dispatch import receiver
 from django.db.models.signals import post_delete
 
-from apps.companies.models import Company
+from apps.companies.models.company import Company
 from apps.general.services import delete_file_after_delete_obj
 
 
